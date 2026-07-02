@@ -1,13 +1,17 @@
-BT Block Order DEV v5.6
+BT Block Order DEV v5.7 Clean CSS
 
-Stronger layout test:
-- Gives quantity controls 75% of the card width on phones.
-- Makes number box and +/- buttons visibly wider.
-- Adds visible DEV 5.6 · LAYOUT FIX badge so you can confirm the new version loaded.
+What changed:
+- Cleaned the quantity layout CSS into one final source-of-truth block.
+- Removed earlier layered DEV layout override blocks.
+- Fixed the quantity panel at the layout source:
+  - picture area is 28-30%
+  - On Site / Order area is 70-72%
+  - quantity boxes fill the available space
+  - numbers and +/- buttons are wider and centred
+- Fixed a broken JavaScript line from the uploaded dev source.
+- Added visible badge: DEV 5.7 · CLEAN CSS
 
-Upload/replace all files to block-order-dev.
+Upload/replace all files in this ZIP to block-order-dev.
 
-Then open:
+Dev link:
 https://bthake-glitch.github.io/block-order-dev/
-
-If the badge does not say DEV 5.6 · LAYOUT FIX, your browser is still showing an older cached version.
