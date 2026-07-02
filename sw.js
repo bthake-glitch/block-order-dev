@@ -1,4 +1,4 @@
-const CACHE = 'bt-block-order-dev-v5-9-clean';
+const CACHE = 'bt-block-order-dev-v5-12-polish';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-yellow-192.png', './icon-yellow-512.png'];
 
 self.addEventListener('install', e => {

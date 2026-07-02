@@ -1,4 +1,4 @@
-const BT_DEV_VERSION = '5.9';
+const BT_DEV_VERSION = '5.11';
 /*
 BT Block Order DEV - app.js
 Production clone behaviour.

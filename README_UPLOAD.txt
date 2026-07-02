@@ -1,10 +1,9 @@
-Upload these files to block-order-dev:
+BT Block Order DEV v5.12 Polish
 
-- index.html
-- app.js
-- manifest.webmanifest
-- sw.js
-- icon-192.png
-- icon-512.png
-- icon-yellow-192.png
-- icon-yellow-512.png
+Upload/replace all files in the block-order-dev repository.
+
+Badge should show:
+DEV 5.12 · POLISH
+
+Dev link:
+https://bthake-glitch.github.io/block-order-dev/
