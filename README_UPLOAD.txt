@@ -1,1 +1,1 @@
-Upload these files to the block-order-dev repository. Replace existing files.
+Upload every file and folder in this ZIP to the block-order-dev repository.
