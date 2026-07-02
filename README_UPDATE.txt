@@ -1,12 +1,11 @@
-BT Block Order DEV v5.12 Polish
+BT Block Order DEV v5.13 Compact 4
 
-Changes:
-- Made every block card the same fixed height.
-- Centred block drawings in their panels.
-- Increased drawing size slightly.
-- Kept On Site and Order columns identical widths.
-- Tidied spacing and padding so cards line up evenly.
-- Keeps DEV v5.11 CSS cleanup and v5.10 quantity border fix.
+Change:
+- Made block cards shorter so about 4 orders fit on a phone screen.
+- Kept equal card heights.
+- Centered drawings.
+- Kept On Site and Order columns equal.
+- Reduced spacing, button height and input height for a tighter layout.
 
 Upload/replace all files to block-order-dev.
 
