@@ -1,10 +1,22 @@
-BT Block Order DEV v5.22 PDF PICS
-
-Change:
-- Replaced block drawings with cropped product pictures taken from the supplied Adbri SQLD Besser Block & Brick Guide PDF.
-- Keeps series buttons, supplier details, summary actions and total bar.
-
-Upload/replace all files and the block-img folder to block-order-dev.
-
-Dev link:
-https://bthake-glitch.github.io/block-order-dev/
+{
+  "name": "BT Block Order DEV",
+  "short_name": "BT DEV",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#f5c400",
+  "icons": [
+    {
+      "src": "icon-yellow-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-yellow-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
