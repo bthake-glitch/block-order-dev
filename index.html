@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BT Block Order DEV</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-yellow-192.png">
+<link rel="apple-touch-icon" href="icon-yellow-512.png">
+<meta name="theme-color" content="#f5c400">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>BT BLOCK ORDER DEV</h1>
+  <div class="sub">200 Series Concrete Masonry Units</div>
+  <div class="actions"><button class="primary" onclick="copyOrder()">Copy Order</button><button onclick="checkForUpdate()">Update</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+
+  <div class="star-note">Tap ★ to mark common blocks. Gold stars stay at the top.</div>
+  <button class="job-toggle" onclick="toggleJobPanel()" type="button">
+    <span>📂 Job</span>
+    <span id="jobArrow">▼</span>
+  </button>
+  <div class="job-summary" id="jobSummary">No saved job selected</div>
+  <div class="job-panel collapsed" id="jobPanel">
+    <label>Saved Jobs
+      <select id="jobSelect" onchange="loadSelectedJob()">
+        <option value="">Saved Jobs</option>
+      </select>
+    </label>
+    <label>Job Name
+      <input id="jobName" placeholder="e.g. 55 York St" oninput="markJobChanged()">
+    </label>
+    <label>Site Address
+      <input id="siteAddress" placeholder="e.g. 55 York Street, Indooroopilly" oninput="markJobChanged()">
+    </label>
+    <div class="job-actions">
+      <button onclick="saveJob()" type="button">💾 Save</button>
+      <button onclick="newJob()" type="button">+ New</button>
+      <button class="clear" onclick="deleteJob()" type="button">Delete</button>
+    </div>
+  </div>
+
+</header>
+<main id="list"></main>
+<div class="small">Drawings/product details taken from the supplied  South Queensland Besser Block & Brick Guide, March 2026.</div>
+<div class="small">BT Block Order DEV · Version 5.1</div>
+<div class="update-banner" id="updateBanner">New version available <button onclick="applyUpdate()">Reload</button></div>
+<div class="footer"><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+<script src="app.js"></script>
+</body>
+</html>
