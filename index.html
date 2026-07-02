@@ -78,8 +78,9 @@ main{padding:4px 10px 46px;}
 
 /* Footer and update UI */
 .small{font-size:10px;color:#555;text-align:center;padding:0 10px 56px;}
-.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:5px;padding:3px 8px calc(3px + env(safe-area-inset-bottom));z-index:8;align-items:stretch;}
-.footer button{padding:3px 5px;min-height:30px;font-size:12px;border-radius:8px;}
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:.9fr 1fr 1fr 1fr;gap:5px;padding:3px 8px calc(3px + env(safe-area-inset-bottom));z-index:8;align-items:stretch;}
+.footer button{padding:3px 4px;min-height:30px;font-size:11px;border-radius:8px;}
+.summary-btn{background:#ffea00;color:#111;border-color:#111;}
 .total-box{border:2px solid #111;border-radius:8px;background:#ffea00;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:30px;font-weight:900;line-height:1;}
 .total-box .total-label{font-size:8px;}
 .total-box .total-value{font-size:16px;}
@@ -146,10 +147,10 @@ main{padding:4px 10px 46px;}
 <div class="small">Drawings/product details taken from the supplied  South Queensland Besser Block & Brick Guide, March 2026.</div>
 <div class="small">BT Block Order DEV · Version 5.15</div>
 <div class="update-banner" id="updateBanner">New version available <button onclick="applyUpdate()">Reload</button></div>
-<div class="dev-badge">DEV 5.15 · TOTAL</div>
-<div class="footer"><div class="total-box" aria-live="polite"><div class="total-label">ORDER TOTAL</div><div class="total-value" id="orderTotal">0</div></div><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+<div class="dev-badge">DEV 5.16 · SUMMARY</div>
+<div class="footer"><div class="total-box" aria-live="polite"><div class="total-label">ORDER TOTAL</div><div class="total-value" id="orderTotal">0</div></div><button class="summary-btn" onclick="copyMaterialsSummary()">Summary</button><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
 <script>
-const BT_DEV_VERSION = '5.11';
+const BT_DEV_VERSION = '5.16';
 /*
 BT Block Order DEV - app.js
 Production clone behaviour.
@@ -237,6 +238,48 @@ async function copyOrder(){
     prompt('Copy this order:',text);
   }
 }
+
+async function copyMaterialsSummary(){
+  const jobName=(document.getElementById('jobName')?.value||'').trim();
+  const siteAddress=(document.getElementById('siteAddress')?.value||'').trim();
+  let lines=['BT MATERIALS SUMMARY',''];
+  if(jobName) lines.push('Job: '+jobName);
+  if(siteAddress) lines.push('Address: '+siteAddress);
+  if(jobName || siteAddress) lines.push('');
+
+  let onTotal=0, orderTotal=0, usedTypes=0;
+  const rows=[];
+  for(const b of blocks){
+    const onQty=readQty(sid(b.code,'on'));
+    const orderQty=readQty(sid(b.code,'order'));
+    const rowTotal=onQty + orderQty;
+    if(onQty || orderQty){
+      usedTypes++;
+      onTotal += onQty;
+      orderTotal += orderQty;
+      rows.push(`${b.code}  ${b.name}\n  On Site: ${onQty}   Order: ${orderQty}   Total: ${rowTotal}`);
+    }
+  }
+
+  if(!rows.length){ alert('No quantities filled in yet.'); return; }
+
+  lines.push('BLOCKS');
+  lines.push(...rows);
+  lines.push('');
+  lines.push('ON SITE TOTAL: '+onTotal);
+  lines.push('ORDER TOTAL: '+orderTotal);
+  lines.push('TOTAL BLOCKS: '+(onTotal + orderTotal));
+  lines.push('BLOCK TYPES USED: '+usedTypes);
+
+  const text=lines.join('\n');
+  try{
+    await navigator.clipboard.writeText(text);
+    alert('Materials summary copied. Paste into SMS, email or notes.');
+  }catch(e){
+    prompt('Copy this materials summary:', text);
+  }
+}
+
 function clearAll(){
  if(!confirm('Clear all On Site and Order quantities?')) return;
  for(const b of blocks){for(const t of ['on','order']){const id=sid(b.code,t);localStorage.removeItem(id);document.getElementById(id).value=''}}
