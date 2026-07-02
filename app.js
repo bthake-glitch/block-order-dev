@@ -1,3 +1,4 @@
+const BT_DEV_VERSION = '5.9';
 /*
 BT Block Order DEV - app.js
 Production clone behaviour.
@@ -238,6 +239,17 @@ async function checkForUpdate(){
   }
 }
 
+
+async function registerServiceWorker(){
+  if(!('serviceWorker' in navigator)) return;
+  try{
+    const reg = await navigator.serviceWorker.register('./sw.js');
+    await reg.update();
+  }catch(e){
+    console.log('Service worker registration failed', e);
+  }
+}
+
 async function autoCheckForUpdate(){
   try{
     if(!('serviceWorker' in navigator)) return;
@@ -252,5 +264,6 @@ async function autoCheckForUpdate(){
 }
 
 window.addEventListener('load', () => {
+  registerServiceWorker();
   setTimeout(autoCheckForUpdate, 1500);
 });

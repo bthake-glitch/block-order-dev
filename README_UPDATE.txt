@@ -1,19 +1,13 @@
-BT Block Order v4.2
+BT Block Order DEV v5.9 Clean
 
-Change:
-- Added automatic update check when the app opens.
-- If a newer version is available, the app shows a reload banner.
-- Update button still works as a manual backup.
-- Keeps stacked quantity controls, smaller footer, gold stars and yellow/black icon.
+Changes:
+- Fixed the JavaScript inside index.html, including the Copy Order line.
+- Added service worker registration so the update system can actually install sw.js.
+- Cleaned the CSS down to one clear version of each rule.
+- Kept the wider On Site / Order quantity controls.
+- Badge should show: DEV 5.9 · CLEAN
 
-Upload/replace all 7 files:
-- index.html
-- manifest.webmanifest
-- sw.js
-- icon-192.png
-- icon-512.png
-- icon-yellow-192.png
-- icon-yellow-512.png
+Upload/replace all files to block-order-dev.
 
-After upload/commit, open:
-https://bthake-glitch.github.io/block-order/
+Dev link:
+https://bthake-glitch.github.io/block-order-dev/
