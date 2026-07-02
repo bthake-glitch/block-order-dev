@@ -1,11 +1,8 @@
-BT Block Order DEV v5.20 Text Supplier
+BT Block Order DEV v5.21 Series
 
-Changes:
-- Added 💬 Text button to the Summary screen.
-- Summary bottom buttons are now Copy, Text, Email, Print and Close.
-- Added Supplier Name, Supplier Phone and Supplier Email fields to saved jobs.
-- Text opens SMS with the summary filled in.
-- Email opens with the supplier email if saved.
+Added selectable buttons for 200mm, 150mm, 100mm, 300mm, Capping and All Series.
+Added product entries from the South Queensland Besser Block & Brick Guide March 2026.
+Keeps supplier text/email summary tools and running total.
 
 Upload/replace all files to block-order-dev.
 
