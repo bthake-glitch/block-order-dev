@@ -1,19 +1,13 @@
-BT Block Order DEV v5.4
+BT Block Order DEV v5.6
 
-Change:
-- Quantity controls now fill the available On Site / Order box better.
-- Less wasted space on the right side.
-- Number display made slightly larger.
-- Dev app only.
+Stronger layout test:
+- Gives quantity controls 75% of the card width on phones.
+- Makes number box and +/- buttons visibly wider.
+- Adds visible DEV 5.6 · LAYOUT FIX badge so you can confirm the new version loaded.
 
-Upload/replace these 7 files in block-order-dev:
-- index.html
-- manifest.webmanifest
-- sw.js
-- icon-192.png
-- icon-512.png
-- icon-yellow-192.png
-- icon-yellow-512.png
+Upload/replace all files to block-order-dev.
 
-Dev link:
+Then open:
 https://bthake-glitch.github.io/block-order-dev/
+
+If the badge does not say DEV 5.6 · LAYOUT FIX, your browser is still showing an older cached version.

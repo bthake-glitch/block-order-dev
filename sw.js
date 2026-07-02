@@ -1,4 +1,4 @@
-const CACHE = 'bt-block-order-dev-v5-3-exact-clone';
+const CACHE = 'bt-block-order-dev-v5-6-strong-qty-layout';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-yellow-192.png', './icon-yellow-512.png'];
 
 self.addEventListener('install', e => {
