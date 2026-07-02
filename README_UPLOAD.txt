@@ -1,7 +1,8 @@
-BT Block Order DEV v6.4 IMAGE FIT
+BT Block Order DEV v6.5 CLEAN PICTURES
 
 Fix:
-- Makes the PDF block drawings slightly smaller inside the picture panel so the measurement numbers around the block are not cut off.
-- Keeps the cleaned split-code structure from v6.3.
+- Replaced cropped PDF block pictures with clean full-picture embeds.
+- Measurement numbers around the 300mm blocks should now show properly.
+- Badge should show DEV 6.5 · CLEAN PICS.
 
 Upload all files to block-order-dev.
