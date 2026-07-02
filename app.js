@@ -66,7 +66,7 @@ function renderBlocks(){
  const on=sid(b.code,'on'), order=sid(b.code,'order');
  const card=document.createElement('section'); card.className='card';
  card.innerHTML=`<div class="head"><div class="code">${b.code}</div><div class="name"><button class="fav-star ${isFav(b.code) ? 'fav' : ''}" onclick="toggleFav('${b.code}')" type="button">★</button><span class="name-text">${b.name}</span></div></div>
- <div class="body"><div class="drawing"><img src="${b.img}" alt="${b.code} ${b.name}"><div class="dim-big">${b.dim || DIMENSIONS_BY_CODE[b.code] || ""}</div></div>
+ <div class="body"><div class="drawing series-${b.series || '200'}"><img src="${b.img}" alt="${b.code} ${b.name}"><div class="dim-big">${b.dim || DIMENSIONS_BY_CODE[b.code] || ""}</div></div>
  <div class="fields"><label class="on">ON SITE<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${on}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${on}" value="${localStorage.getItem(on)||''}" oninput="localStorage.setItem('${on}',this.value);updateTotals()"><button class="qty-step" type="button" onclick="stepQty('${on}',1)">+</button></div></label>
  <label class="order">ORDER<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${order}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${order}" value="${localStorage.getItem(order)||''}" oninput="localStorage.setItem('${order}',this.value);updateTotals()"><button class="qty-step" type="button" onclick="stepQty('${order}',1)">+</button></div></label></div></div>`;
  list.appendChild(card);
