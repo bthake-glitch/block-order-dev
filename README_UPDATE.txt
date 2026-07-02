@@ -1,9 +1,8 @@
-BT Block Order DEV v5.15 TOTAL
+BT Block Order DEV v5.17 Summary View
 
 Change:
-- Added a running ORDER TOTAL at the bottom of the app.
-- Total updates when typing, tapping +/-, and clearing quantities.
-- Keeps the compact 4-card layout from v5.14.
+- Removed the bottom Copy Order button so there is only one Copy Order button at the top.
+- Summary button now opens the materials summary on screen instead of copying it.
+- Keeps ORDER TOTAL and compact 4-card layout.
 
-Dev link:
-https://bthake-glitch.github.io/block-order-dev/
+Upload/replace all files to block-order-dev.

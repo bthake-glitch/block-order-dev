@@ -78,12 +78,17 @@ main{padding:4px 10px 46px;}
 
 /* Footer and update UI */
 .small{font-size:10px;color:#555;text-align:center;padding:0 10px 56px;}
-.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:.9fr 1fr 1fr 1fr;gap:5px;padding:3px 8px calc(3px + env(safe-area-inset-bottom));z-index:8;align-items:stretch;}
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:.9fr 1fr 1fr;gap:5px;padding:3px 8px calc(3px + env(safe-area-inset-bottom));z-index:8;align-items:stretch;}
 .footer button{padding:3px 4px;min-height:30px;font-size:11px;border-radius:8px;}
 .summary-btn{background:#ffea00;color:#111;border-color:#111;}
 .total-box{border:2px solid #111;border-radius:8px;background:#ffea00;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:30px;font-weight:900;line-height:1;}
 .total-box .total-label{font-size:8px;}
 .total-box .total-value{font-size:16px;}
+.summary-modal{position:fixed;inset:0;z-index:120;background:#0008;display:none;align-items:center;justify-content:center;padding:14px;}
+.summary-card{width:min(720px,100%);max-height:86vh;background:#fff;border:3px solid #111;border-radius:12px;box-shadow:0 4px 18px #0006;display:flex;flex-direction:column;overflow:hidden;}
+.summary-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-bottom:2px solid #111;background:#ffea00;font-weight:900;font-size:15px;}
+.summary-close{min-width:60px;min-height:30px;font-size:12px;padding:4px 8px;background:#fff;}
+.summary-text{white-space:pre-wrap;overflow:auto;padding:10px;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.25;font-weight:800;}
 .update-banner{position:fixed;left:10px;right:10px;bottom:50px;z-index:50;background:#111;color:var(--yellow);border:3px solid var(--yellow);border-radius:12px;padding:10px;font-size:14px;font-weight:900;text-align:center;display:none;}
 .update-banner button{margin-left:8px;padding:6px 10px;font-size:13px;border:2px solid var(--yellow);background:var(--yellow);color:#111;}
 .dev-badge{position:fixed;right:8px;bottom:40px;z-index:99;background:#ffea00;color:#111;border:2px solid #111;border-radius:8px;padding:3px 7px;font-size:11px;font-weight:900;opacity:.92;}
@@ -145,12 +150,18 @@ main{padding:4px 10px 46px;}
 </header>
 <main id="list"></main>
 <div class="small">Drawings/product details taken from the supplied  South Queensland Besser Block & Brick Guide, March 2026.</div>
-<div class="small">BT Block Order DEV · Version 5.15</div>
+<div class="small">BT Block Order DEV · Version 5.17</div>
 <div class="update-banner" id="updateBanner">New version available <button onclick="applyUpdate()">Reload</button></div>
-<div class="dev-badge">DEV 5.16 · SUMMARY</div>
-<div class="footer"><div class="total-box" aria-live="polite"><div class="total-label">ORDER TOTAL</div><div class="total-value" id="orderTotal">0</div></div><button class="summary-btn" onclick="copyMaterialsSummary()">Summary</button><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+<div class="dev-badge">DEV 5.17 · SUMMARY VIEW</div>
+<div class="footer"><div class="total-box" aria-live="polite"><div class="total-label">ORDER TOTAL</div><div class="total-value" id="orderTotal">0</div></div><button class="summary-btn" onclick="showMaterialsSummary()">Summary</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+<div class="summary-modal" id="summaryModal" onclick="if(event.target===this) closeMaterialsSummary()">
+  <div class="summary-card" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+    <div class="summary-head"><span id="summaryTitle">Materials Summary</span><button class="summary-close" onclick="closeMaterialsSummary()" type="button">Close</button></div>
+    <div class="summary-text" id="summaryText"></div>
+  </div>
+</div>
 <script>
-const BT_DEV_VERSION = '5.16';
+const BT_DEV_VERSION = '5.17';
 /*
 BT Block Order DEV - app.js
 Production clone behaviour.
@@ -239,7 +250,7 @@ async function copyOrder(){
   }
 }
 
-async function copyMaterialsSummary(){
+function buildMaterialsSummary(){
   const jobName=(document.getElementById('jobName')?.value||'').trim();
   const siteAddress=(document.getElementById('siteAddress')?.value||'').trim();
   let lines=['BT MATERIALS SUMMARY',''];
@@ -261,7 +272,7 @@ async function copyMaterialsSummary(){
     }
   }
 
-  if(!rows.length){ alert('No quantities filled in yet.'); return; }
+  if(!rows.length) return '';
 
   lines.push('BLOCKS');
   lines.push(...rows);
@@ -270,14 +281,21 @@ async function copyMaterialsSummary(){
   lines.push('ORDER TOTAL: '+orderTotal);
   lines.push('TOTAL BLOCKS: '+(onTotal + orderTotal));
   lines.push('BLOCK TYPES USED: '+usedTypes);
+  return lines.join('\n');
+}
 
-  const text=lines.join('\n');
-  try{
-    await navigator.clipboard.writeText(text);
-    alert('Materials summary copied. Paste into SMS, email or notes.');
-  }catch(e){
-    prompt('Copy this materials summary:', text);
-  }
+function showMaterialsSummary(){
+  const text = buildMaterialsSummary();
+  if(!text){ alert('No quantities filled in yet.'); return; }
+  const modal = document.getElementById('summaryModal');
+  const output = document.getElementById('summaryText');
+  if(output) output.textContent = text;
+  if(modal) modal.style.display = 'flex';
+}
+
+function closeMaterialsSummary(){
+  const modal = document.getElementById('summaryModal');
+  if(modal) modal.style.display = 'none';
 }
 
 function clearAll(){
