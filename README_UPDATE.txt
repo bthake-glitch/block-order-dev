@@ -1,13 +1,9 @@
-BT Block Order DEV v5.13 Compact 4
+BT Block Order DEV v5.15 TOTAL
 
 Change:
-- Made block cards shorter so about 4 orders fit on a phone screen.
-- Kept equal card heights.
-- Centered drawings.
-- Kept On Site and Order columns equal.
-- Reduced spacing, button height and input height for a tighter layout.
-
-Upload/replace all files to block-order-dev.
+- Added a running ORDER TOTAL at the bottom of the app.
+- Total updates when typing, tapping +/-, and clearing quantities.
+- Keeps the compact 4-card layout from v5.14.
 
 Dev link:
 https://bthake-glitch.github.io/block-order-dev/

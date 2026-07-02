@@ -78,8 +78,11 @@ main{padding:4px 10px 46px;}
 
 /* Footer and update UI */
 .small{font-size:10px;color:#555;text-align:center;padding:0 10px 56px;}
-.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:3px 10px calc(3px + env(safe-area-inset-bottom));z-index:8;}
-.footer button{padding:3px 6px;min-height:30px;font-size:12px;border-radius:8px;}
+.footer{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid #111;display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:5px;padding:3px 8px calc(3px + env(safe-area-inset-bottom));z-index:8;align-items:stretch;}
+.footer button{padding:3px 5px;min-height:30px;font-size:12px;border-radius:8px;}
+.total-box{border:2px solid #111;border-radius:8px;background:#ffea00;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:30px;font-weight:900;line-height:1;}
+.total-box .total-label{font-size:8px;}
+.total-box .total-value{font-size:16px;}
 .update-banner{position:fixed;left:10px;right:10px;bottom:50px;z-index:50;background:#111;color:var(--yellow);border:3px solid var(--yellow);border-radius:12px;padding:10px;font-size:14px;font-weight:900;text-align:center;display:none;}
 .update-banner button{margin-left:8px;padding:6px 10px;font-size:13px;border:2px solid var(--yellow);background:var(--yellow);color:#111;}
 .dev-badge{position:fixed;right:8px;bottom:40px;z-index:99;background:#ffea00;color:#111;border:2px solid #111;border-radius:8px;padding:3px 7px;font-size:11px;font-weight:900;opacity:.92;}
@@ -141,10 +144,10 @@ main{padding:4px 10px 46px;}
 </header>
 <main id="list"></main>
 <div class="small">Drawings/product details taken from the supplied  South Queensland Besser Block & Brick Guide, March 2026.</div>
-<div class="small">BT Block Order DEV · Version 5.14</div>
+<div class="small">BT Block Order DEV · Version 5.15</div>
 <div class="update-banner" id="updateBanner">New version available <button onclick="applyUpdate()">Reload</button></div>
-<div class="dev-badge">DEV 5.14 · 4 FULL</div>
-<div class="footer"><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
+<div class="dev-badge">DEV 5.15 · TOTAL</div>
+<div class="footer"><div class="total-box" aria-live="polite"><div class="total-label">ORDER TOTAL</div><div class="total-value" id="orderTotal">0</div></div><button onclick="copyOrder()">Copy Order</button><button class="clear" onclick="clearAll()">Clear All</button></div>
 <script>
 const BT_DEV_VERSION = '5.11';
 /*
@@ -187,6 +190,16 @@ function writeQty(id, value){
 }
 function stepQty(id, delta){
   writeQty(id, readQty(id) + delta);
+  updateTotals();
+}
+
+function updateTotals(){
+  let orderTotal = 0;
+  for(const b of blocks){
+    orderTotal += readQty(sid(b.code,'order'));
+  }
+  const el = document.getElementById('orderTotal');
+  if(el) el.textContent = String(orderTotal);
 }
 
 function renderBlocks(){
@@ -196,12 +209,13 @@ function renderBlocks(){
  const card=document.createElement('section'); card.className='card';
  card.innerHTML=`<div class="head"><div class="code">${b.code}</div><div class="name"><button class="fav-star ${isFav(b.code) ? 'fav' : ''}" onclick="toggleFav('${b.code}')" type="button">★</button><span class="name-text">${b.name}</span></div></div>
  <div class="body"><div class="drawing"><img src="${b.img}" alt="${b.code} ${b.name}"><div class="dim-big">${b.dim || DIMENSIONS_BY_CODE[b.code] || ""}</div></div>
- <div class="fields"><label class="on">ON SITE<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${on}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${on}" value="${localStorage.getItem(on)||''}" oninput="localStorage.setItem('${on}',this.value)"><button class="qty-step" type="button" onclick="stepQty('${on}',1)">+</button></div></label>
- <label class="order">ORDER<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${order}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${order}" value="${localStorage.getItem(order)||''}" oninput="localStorage.setItem('${order}',this.value)"><button class="qty-step" type="button" onclick="stepQty('${order}',1)">+</button></div></label></div></div>`;
+ <div class="fields"><label class="on">ON SITE<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${on}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${on}" value="${localStorage.getItem(on)||''}" oninput="localStorage.setItem('${on}',this.value);updateTotals()"><button class="qty-step" type="button" onclick="stepQty('${on}',1)">+</button></div></label>
+ <label class="order">ORDER<div class="qty-wrap"><button class="qty-step" type="button" onclick="stepQty('${order}',-1)">−</button><input inputmode="numeric" pattern="[0-9]*" id="${order}" value="${localStorage.getItem(order)||''}" oninput="localStorage.setItem('${order}',this.value);updateTotals()"><button class="qty-step" type="button" onclick="stepQty('${order}',1)">+</button></div></label></div></div>`;
  list.appendChild(card);
 }
 }
 renderBlocks();
+updateTotals();
 async function copyOrder(){
   let lines=['BT BLOCK ORDER',''];
   const jobName=(document.getElementById('jobName')?.value||'').trim();
@@ -226,6 +240,7 @@ async function copyOrder(){
 function clearAll(){
  if(!confirm('Clear all On Site and Order quantities?')) return;
  for(const b of blocks){for(const t of ['on','order']){const id=sid(b.code,t);localStorage.removeItem(id);document.getElementById(id).value=''}}
+ updateTotals();
 }
 
 

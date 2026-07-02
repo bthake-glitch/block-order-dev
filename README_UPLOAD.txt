@@ -1,2 +1,3 @@
-Upload all files in this folder to the block-order-dev repository.
-Badge should show: DEV 5.13 · COMPACT 4
+BT Block Order DEV v5.15 TOTAL
+
+Upload/replace all files to block-order-dev.
