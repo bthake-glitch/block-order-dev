@@ -1,12 +1,10 @@
-BT Block Order DEV v5.2 Production Clone
+BT Block Order DEV v5.3 Exact Clone
 
-This should look the same as your current working app.
-Only visible difference: small DEV 5.2 badge.
+This is an all-in-one clone of the working app.
+It should look the same as production, except for a small DEV 5.3 badge.
 
-Upload/replace these 9 files in block-order-dev:
+Upload/replace these 7 files to block-order-dev:
 - index.html
-- styles.css
-- app.js
 - manifest.webmanifest
 - sw.js
 - icon-192.png
