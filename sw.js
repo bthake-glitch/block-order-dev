@@ -1,4 +1,4 @@
-const CACHE = 'bt-block-order-dev-v6-1-good';
+const CACHE = 'bt-block-order-dev-v6-2-embedded-pics';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-yellow-192.png', './icon-yellow-512.png'
 ];

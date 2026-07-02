@@ -1,4 +1,8 @@
-BT Block Order DEV v6.1 GOOD
+BT Block Order DEV v6.2 Embedded Pics
 
-Upload all files and the block-img folder to the root of the block-order-dev GitHub repository.
-IMPORTANT: index.html must be 266 KB approx and must start with <!doctype html>, not PNG.
+Fix:
+- Block pictures are now embedded inside index.html.
+- No block-img folder upload needed.
+- This avoids broken images if GitHub upload misses the folder.
+
+Upload/replace the files in this ZIP to block-order-dev.
