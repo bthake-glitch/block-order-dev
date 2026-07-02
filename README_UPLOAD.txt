@@ -1,4 +1,4 @@
-Upload all files and folders in this ZIP to the root of the block-order-dev GitHub repository.
+BT Block Order DEV v6.1 GOOD
 
-Do not rename index.html.
-Keep the block-img folder at the root beside index.html.
+Upload all files and the block-img folder to the root of the block-order-dev GitHub repository.
+IMPORTANT: index.html must be 266 KB approx and must start with <!doctype html>, not PNG.
