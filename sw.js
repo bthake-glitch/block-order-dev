@@ -1,4 +1,4 @@
-const CACHE = 'bt-block-order-dev-v6-5-clean-pictures';
+const CACHE = 'bt-block-order-dev-v6-6-picture-source-fix';
 const FILES = [
   './',
   './index.html',

@@ -1,8 +1,8 @@
-BT Block Order DEV v6.5 CLEAN PICTURES
+BT Block Order DEV v6.6 PICTURE SOURCE FIX
 
 Fix:
-- Replaced cropped PDF block pictures with clean full-picture embeds.
-- Measurement numbers around the 300mm blocks should now show properly.
-- Badge should show DEV 6.5 · CLEAN PICS.
+- Replaced the broken/cropped 300mm series source images inside blocks.js.
+- The v6.5 PNG files were in the ZIP but the app was still using the old embedded SVG drawings for 30.02, 30.03 and 30.925.
+- Badge should show DEV 6.6 · PIC FIX.
 
-Upload all files to block-order-dev.
+Upload/replace all files.
